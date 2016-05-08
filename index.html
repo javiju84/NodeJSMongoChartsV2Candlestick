@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>MongoDB/Mongoose Demo</title>
+    <script type="text/javascript" src="./node_modules/zingchart/client/zingchart.min.js"></script>
+    
+    <!--
+    <script>
+    zingchart.MODULESDIR = "https://cdn.zingchart.com/modules/";
+    ZC.LICENSE = ["569d52cefae586f634c54f86dc99e6a9", "ee6b7db5b51705a13dc2339db3edaf6d"];
+    </script> 
+    -->
+
+  </head>
+  <body>
+  <h1>MCandlestick Chart</h1>
+    <div id="myChart"></div>
+    <script>
+    // Generates GET requests to a URL.
+    function httpGet(Url){
+      var xmlHttp = new XMLHttpRequest();
+      xmlHttp.open("GET", Url, false);
+      xmlHttp.send(null);
+      return xmlHttp.responseText;
+    }
+
+    window.onload=function(){
+      // GET request to localhost:3000/test, which has been configured to send back our db data
+      var aData = JSON.parse(httpGet('http://localhost:7070/BANCA'));
+      var seriesData = {
+        abierto: [],
+        alto: [],
+        bajo: [],
+        cierre: []
+      };
+
+      // Push the data into the seriesData object's arrays.
+      for(var n = 0; n < aData.length; n++){
+        seriesData['abierto'].push(aData[n]['abierto']);
+        seriesData['alto'].push(aData[n]['alto']);
+        seriesData['bajo'].push(aData[n]['bajo']);
+        seriesData['cierre'].push(aData[n]['cierre']);
+      }
+      zingchart.render({
+        id:"myChart",
+        data: myConfig,
+        height:400,
+        width:"100%"  
+      });
+
+      // Render the chart using the data from Mongo
+      var myConfig = {
+        "type":"stock",
+          "title":{
+            "text":"Candlestick Chart"
+          },
+        "plot":{
+            "aspect":"candlestick",
+          },
+        "scale-y": {
+          "values": "30:34:2"
+          },  
+        "series":[{
+            "values": [seriesData['abierto'],seriesData['alto'],seriesData['bajo'],seriesData['cierre']]
+          }
+            
+          ]
+      };
+      
+    };
+    </script>
+    
+  </body>
+</html>
