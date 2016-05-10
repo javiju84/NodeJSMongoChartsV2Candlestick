@@ -27,6 +27,8 @@
     window.onload=function(){
       // GET request to localhost:3000/test, which has been configured to send back our db data
       var aData = JSON.parse(httpGet('http://localhost:7070/BANCA'));
+
+
       var seriesData = {
         abierto: [],
         alto: [],
@@ -40,13 +42,10 @@
         seriesData['alto'].push(aData[n]['alto']);
         seriesData['bajo'].push(aData[n]['bajo']);
         seriesData['cierre'].push(aData[n]['cierre']);
+        console.log(aData[n]);
       }
-      zingchart.render({
-        id:"myChart",
-        data: myConfig,
-        height:400,
-        width:"100%"  
-      });
+
+      
 
       // Render the chart using the data from Mongo
       var myConfig = {
@@ -58,14 +57,22 @@
             "aspect":"candlestick",
           },
         "scale-y": {
-          "values": "30:34:2"
+          "values": "3:7:2"
           },  
         "series":[{
-            "values": [seriesData['abierto'],seriesData['alto'],seriesData['bajo'],seriesData['cierre']]
+            "values": [seriesData['abierto'],seriesData['alto'],seriesData['bajo'],seriesData['cierre']
+                       
+                       ]
           }
             
           ]
       };
+      zingchart.render({
+        id:"myChart",
+        data: myConfig,
+        height:400,
+        width:"100%"  
+      });
       
     };
     </script>
