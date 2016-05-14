@@ -26,28 +26,27 @@
 
     window.onload=function(){
       // GET request to localhost:3000/test, which has been configured to send back our db data
-      var aData = JSON.parse(httpGet('http://localhost:7070/BANCA'));
-
-
+      var aData = JSON.parse(httpGet('http://localhost:8080/BANCA'));
       var seriesData = {
-        abierto: [],
-        alto: [],
-        bajo: [],
-        cierre: []
+        index: []
       };
-
+      var seriesData2 = {
+        index2: []
+      };
       // Push the data into the seriesData object's arrays.
       for(var n = 0; n < aData.length; n++){
-        seriesData['abierto'].push(aData[n]['abierto']);
-        seriesData['alto'].push(aData[n]['alto']);
-        seriesData['bajo'].push(aData[n]['bajo']);
-        seriesData['cierre'].push(aData[n]['cierre']);
+        seriesData['index'].push(aData[n]['abierto']);
+        seriesData['index'].push(aData[n]['alto']);
+        seriesData['index'].push(aData[n]['bajo']);
+        seriesData['index'].push(aData[n]['cierre']);
         console.log(aData[n]);
       }
-
-      
-
-      // Render the chart using the data from Mongo
+      for(var m = 1; m < aData.length; m++){
+        seriesData2['index2'].push(aData[m]['abierto']);
+        seriesData2['index2'].push(aData[m]['alto']);
+        seriesData2['index2'].push(aData[m]['bajo']);
+        seriesData2['index2'].push(aData[m]['cierre']);
+      }
       var myConfig = {
         "type":"stock",
           "title":{
@@ -56,13 +55,14 @@
         "plot":{
             "aspect":"candlestick",
           },
-        "scale-y": {
+        "scale-y":{
           "values": "3:7:2"
-          },  
+          },
+          
         "series":[{
-            "values": [seriesData['abierto'],seriesData['alto'],seriesData['bajo'],seriesData['cierre']
-                       
-                       ]
+            "values": [seriesData['index'],seriesData2['index2']]
+
+            
           }
             
           ]

@@ -41,6 +41,7 @@ db.once('open',function(callback){
 				jsonDato.cierre = parseFloat(parseo[i][4]);
 				jsonDato.volumen = parseFloat(parseo[i][5]);
 				jsonString.push(jsonDato);
+				//console.log(jsonDato)
 			}
 		
 			var jsonArrayValor = JSON.parse(JSON.stringify(jsonString));
@@ -51,6 +52,7 @@ db.once('open',function(callback){
 				var docToAdd = new Document(aDocs[n]);
 				docToAdd.save(function(error,docToAdd){
 					if (error) return console.error(error)
+						//console.log(aDocs[n])
 				});
 			}
 		}
@@ -70,5 +72,5 @@ app.get('/BANCA', function (req, res) {
 	});
 });
 
-app.listen(7070);
-console.log("Servidor conectado puerto 7070");
+app.listen(8080);
+console.log("Servidor conectado puerto 8080");
