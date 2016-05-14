@@ -48,7 +48,7 @@ db.once('open',function(callback){
 		
 			var aDocs = jsonArrayValor;
 			//for (var n = 0; n < aDocs.length; n++){
-			for (var n = 0; n < 20; n++){
+			for (var n = 0; n <  aDocs.length; n++){
 				var docToAdd = new Document(aDocs[n]);
 				docToAdd.save(function(error,docToAdd){
 					if (error) return console.error(error)

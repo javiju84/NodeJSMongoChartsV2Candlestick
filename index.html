@@ -27,10 +27,8 @@
     window.onload=function(){
       // GET request to localhost:3000/test, which has been configured to send back our db data
       var aData = JSON.parse(httpGet('http://localhost:8080/BANCA'));
-       var seriesData = [];
-      /*var seriesData2 = {
-        index2: []
-      };*/
+      var seriesData = [];
+      
       // Push the data into the seriesData object's arrays.
       for(var n=0 ; n < aData.length; n++){
         seriesData.push([
@@ -42,19 +40,6 @@
         console.log(aData[n])
        }
 
-
-       /* seriesData['index'].push(aData[n]['abierto']);
-        seriesData['index'].push(aData[n]['alto']);
-        seriesData['index'].push(aData[n]['bajo']);
-        seriesData['index'].push(aData[n]['cierre']);*/
-        //console.log(aData[n]);
-      
-     /* for(var m = 1; m < aData.length; m++){
-        seriesData2['index2'].push(aData[m]['abierto']);
-        seriesData2['index2'].push(aData[m]['alto']);
-        seriesData2['index2'].push(aData[m]['bajo']);
-        seriesData2['index2'].push(aData[m]['cierre']);
-      }*/
       var myConfig = {
         "type":"stock",
           "title":{
